@@ -1,4 +1,4 @@
-name: Bulid windows open3d library
+name: Build windows open3d library
 
 on:
   push:
@@ -30,8 +30,8 @@ jobs:
 
       - name: Build
         run: |
-          cd Open3D && md build && cd bulid  
-          cmake .. -DBUILD_SHARED_LIBS=OFF -A x64 -DCMAKE_INSTALL_PREFIX=${{env.install_path}
+          cd Open3D && md build && cd build
+          cmake .. -DBUILD_SHARED_LIBS=OFF -A x64 -DCMAKE_INSTALL_PREFIX=${{env.install_path}}
           cmake --build . --config Release --target INSTALL
 
       
@@ -40,5 +40,5 @@ jobs:
         if: ${{ success() }}
         with:
           name: open3d_win
-          path: ${{ env.installpath }}
+          path: ${{ env.install_path }}
           
