@@ -1,0 +1,44 @@
+name: Bulid windows open3d library
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  install_path: "C:/open3d_win"
+
+jobs:
+  Windows:
+    runs-on: windows-2022
+
+    if: github.event.repository.owner.id == github.event.sender.id
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Download latest open3d 
+        shell: bash
+        run: |
+          git colne https://github.com/isl-org/Open3D.git
+
+      - name: Configure build for amd64
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
+          toolset: 14.29
+
+      - name: Build
+        run: |
+          cd Open3D && md build && cd bulid  
+          cmake .. -DBUILD_SHARED_LIBS=OFF -A x64 -DCMAKE_INSTALL_PREFIX=${{env.install_path}
+          cmake --build . --config Release --target INSTALL
+
+      
+      - name: Upload Windows artifact
+        uses: actions/upload-artifact@v4
+        if: ${{ success() }}
+        with:
+          name: open3d_win
+          path: ${{ env.installpath }}
+      
