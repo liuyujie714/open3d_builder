@@ -31,8 +31,8 @@ jobs:
       - name: Build
         run: |
           cd Open3D && md build && cd build
-          cmake .. -DBUILD_SHARED_LIBS=OFF -A x64 -DCMAKE_INSTALL_PREFIX=${{env.install_path}}
-          cmake --build . --config Release --target INSTALL
+          cmake .. -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Release -DSTATIC_WINDOWS_RUNTIME=ON -G Ninja -DCMAKE_INSTALL_PREFIX=${{env.install_path}}
+          ninja install -j4
 
       
       - name: Upload Windows artifact
