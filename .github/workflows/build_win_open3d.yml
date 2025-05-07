@@ -20,7 +20,7 @@ jobs:
       - name: Download latest open3d 
         shell: bash
         run: |
-          git colne https://github.com/isl-org/Open3D.git
+          git clone https://github.com/isl-org/Open3D.git
 
       - name: Configure build for amd64
         uses: ilammy/msvc-dev-cmd@v1
