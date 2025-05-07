@@ -21,7 +21,6 @@ jobs:
         shell: bash
         run: |
           git clone https://github.com/isl-org/Open3D.git
-
       - name: Configure build for amd64
         uses: ilammy/msvc-dev-cmd@v1
         with:
@@ -31,9 +30,8 @@ jobs:
       - name: Build
         run: |
           cd Open3D && md build && cd build
-          cmake .. -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Release -DSTATIC_WINDOWS_RUNTIME=ON -G Ninja -DCMAKE_INSTALL_PREFIX=${{env.install_path}}
-          ninja install -j4
-
+          cmake .. -DBUILD_SHARED_LIBS=OFF -DSTATIC_WINDOWS_RUNTIME=ON -A x64 -DCMAKE_INSTALL_PREFIX=${{env.install_path}}
+          cmake --build . --config Release --target INSTALL --parallel 4
       
       - name: Upload Windows artifact
         uses: actions/upload-artifact@v4
@@ -41,4 +39,4 @@ jobs:
         with:
           name: open3d_win
           path: ${{ env.install_path }}
-          
+                  
