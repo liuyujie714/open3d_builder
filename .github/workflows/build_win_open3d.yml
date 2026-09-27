@@ -6,8 +6,8 @@ on:
       - main
 
 env:
-  install_path: "C:/open3d_win"
   ver_tag: "v0.20.0"
+  install_path: "C:/open3d_win"
 
 jobs:
   Windows:
@@ -32,7 +32,7 @@ jobs:
       - name: Install Vulkan SDK
         uses: jakoch/install-vulkan-sdk-action@v1.6.0
         with:
-          vulkan_version: 1.3.231.1
+          vulkan_version: 1.4.341.1
           install_runtime: false
           cache: true
 
