@@ -29,6 +29,13 @@ jobs:
           arch: amd64
           toolset: 14.29
 
+      - name: Install Vulkan SDK
+        uses: jakoch/install-vulkan-sdk-action@v1.6.0
+        with:
+          vulkan_version: 1.3.231.1
+          install_runtime: false
+          cache: true
+
       - name: Build
         run: |
           cd Open3D && md build && cd build
